@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2018
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqmToSqfConverter", "SqmToSqfConverter\SqmToSqfConverter.csproj", "{DEAADD9B-6DC6-486D-8820-7CAEDA9326EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DEAADD9B-6DC6-486D-8820-7CAEDA9326EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEAADD9B-6DC6-486D-8820-7CAEDA9326EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEAADD9B-6DC6-486D-8820-7CAEDA9326EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEAADD9B-6DC6-486D-8820-7CAEDA9326EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AA924AE3-DFA3-4E8F-9C23-FB5E4EC1E34A}
+	EndGlobalSection
+EndGlobal
