@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace SqmToSqfConverter
 {
-    static class Program
+    static class Form
     {
         /// <summary>
         /// The main entry point for the application.
@@ -16,7 +16,7 @@ namespace SqmToSqfConverter
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new GUI());
         }
     }
 }
