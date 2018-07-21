@@ -1,4 +1,5 @@
-﻿using SqmToSqfConverter.Models;
+﻿using SqmToSqfConverter.Forms;
+using SqmToSqfConverter.Models;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -8,8 +9,6 @@ namespace SqmToSqfConverter
 {
     public partial class GUI : System.Windows.Forms.Form
     {
-        private Reader _reader;
-
         public GUI()
         {
             InitializeComponent();
@@ -38,6 +37,8 @@ namespace SqmToSqfConverter
         {
             try
             {
+                ButtonStatistics.Enabled = false;
+
                 if (String.IsNullOrEmpty(LabelSelectFile.Text))
                     throw new Exception("Invalid path");
 
@@ -46,12 +47,12 @@ namespace SqmToSqfConverter
 
                 var options = new ConvertOptions()
                 {
-                    AddToGlobalArray = checkBoxAddToGlobalArray.Checked,
-                    AutoDeleteEmptyGroups = checkBoxAutoDeleteEmptyGroups.Checked
+                    AddToGlobalArray = CheckBoxAddToGlobalArray.Checked,
+                    AutoDeleteEmptyGroups = CheckBoxAutoDeleteEmptyGroups.Checked
                 };
 
-                _reader = new Reader(LabelSelectFile.Text);
-                var missionFile = _reader.ReadMissionFile();
+                var reader = new Reader(LabelSelectFile.Text);
+                var missionFile = reader.ReadMissionFile();
                 if (missionFile == null)
                     throw new Exception("Failed to extract mission data");
 
@@ -66,6 +67,8 @@ namespace SqmToSqfConverter
                 }
 
                 File.WriteAllLines(LabelSaveFile.Text, sqf);
+
+                ButtonStatistics.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -94,6 +97,18 @@ namespace SqmToSqfConverter
             {
                 LabelSaveFile.Text = "";
             }
+        }
+
+        private void ButtonStatistics_Click(object sender, EventArgs e)
+        {
+            if (Parser.Mission == null)
+            {
+                ButtonStatistics.Enabled = false;
+                return;
+            }
+
+            var stats = new Stats();
+            stats.Visible = true;
         }
     }
 }
