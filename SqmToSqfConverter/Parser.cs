@@ -1,6 +1,7 @@
 ﻿using SqmToSqfConverter.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SqmToSqfConverter
 {
@@ -59,6 +60,12 @@ namespace SqmToSqfConverter
                 _sqf.Add("groups = [];");
                 _sqf.Add("markers = [];");
             }
+
+            var requiredSites = Mission.Groups.Select(g => g.Side).GroupBy(g => g);
+            foreach (var site in requiredSites)
+                _sqf.Add($"createCenter {site.Key};");
+            if (requiredSites.Count() > 0)
+                _sqf.Add("");
 
             foreach(var entity in Mission.Objects)
             {
