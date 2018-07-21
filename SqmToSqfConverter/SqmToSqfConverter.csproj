@@ -57,6 +57,7 @@
     <Compile Include="Models\ArmAMarker.cs" />
     <Compile Include="Models\ArmAWaypoint.cs" />
     <Compile Include="Models\Attributes.cs" />
+    <Compile Include="Models\ConvertOptions.cs" />
     <Compile Include="Models\CustomAttribute.cs" />
     <Compile Include="Models\GroupAttributes.cs" />
     <Compile Include="Models\IArmAItem.cs" />

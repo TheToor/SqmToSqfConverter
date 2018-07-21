@@ -20,7 +20,7 @@ namespace SqmToSqfConverter.Models
         public string Speed { get; set; }
         public string Combat { get; set; }
 
-        public string GetSqf(out string[] sqf, string groupName = null)
+        public string GetSqf(out string[] sqf, ConvertOptions options, string groupName = null)
         {
             throw new NotSupportedException();
         }

@@ -18,13 +18,17 @@ namespace SqmToSqfConverter.Models
         public List<Link> Links { get; } = new List<Link>();
         public List<ArmAWaypoint> Waypoints { get; set; } = new List<ArmAWaypoint>();
 
-        public string GetSqf(out string[] sqf, string groupName = null)
+        public string GetSqf(out string[] sqf, ConvertOptions options, string groupName = null)
         {
             var code = new List<string>();
 
             var name = Attributes.Name ?? $"group{ID}";
 
-            code.Add($"{name} = createGroup {Side};");
+            if(options.AutoDeleteEmptyGroups)
+                code.Add($"{name} = createGroup [{Side}, true];");
+            else
+                code.Add($"{name} = createGroup {Side};");
+
             if (!String.IsNullOrEmpty(Attributes.CombatMode))
                 code.Add($"{name} setCombatMode \"{Attributes.CombatMode}\";");
             if (!String.IsNullOrEmpty(Attributes.Behaviour))
@@ -39,7 +43,7 @@ namespace SqmToSqfConverter.Models
             foreach(var entity in Entities)
             {
                 entity.ATLOffset = ATLOffset;
-                var unitName = entity.GetSqf(out var entitySQF, name);
+                var unitName = entity.GetSqf(out var entitySQF, options, name);
                 code.AddRange(entitySQF);
             }
 
@@ -105,6 +109,9 @@ namespace SqmToSqfConverter.Models
 
                 waypoint.VariableName = waypointName;
             }
+
+            if (options.AddToGlobalArray)
+                code.Add($"groups pushBack {name};");
 
             code.Add("");
 

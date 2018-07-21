@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SqmToSqfConverter.Models;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
@@ -43,13 +44,19 @@ namespace SqmToSqfConverter
                 if (String.IsNullOrEmpty(LabelSaveFile.Text))
                     throw new Exception("Invalid save path");
 
+                var options = new ConvertOptions()
+                {
+                    AddToGlobalArray = checkBoxAddToGlobalArray.Checked,
+                    AutoDeleteEmptyGroups = checkBoxAutoDeleteEmptyGroups.Checked
+                };
+
                 _reader = new Reader(LabelSelectFile.Text);
                 var missionFile = _reader.ReadMissionFile();
                 if (missionFile == null)
                     throw new Exception("Failed to extract mission data");
 
                 var parser = new Parser(missionFile);
-                var sqf = parser.Parse();
+                var sqf = parser.Parse(options);
 
                 Debug.WriteLine("=================================");
                 Debug.WriteLine("Translated SQF:");

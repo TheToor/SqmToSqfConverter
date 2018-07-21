@@ -21,7 +21,7 @@ namespace SqmToSqfConverter.Models
 
         public bool GunnerSeatUsed { get; set; }
 
-        public string GetSqf(out string[] sqf, string groupName = null)
+        public string GetSqf(out string[] sqf, ConvertOptions options, string groupName = null)
         {
             var code = new List<string>();
 
@@ -75,7 +75,9 @@ namespace SqmToSqfConverter.Models
 
                 code.Add(formattedCode);
             }
-            
+
+            if (options.AddToGlobalArray)
+                code.Add($"objects pushBack {name};");
 
             code.Add("");
 

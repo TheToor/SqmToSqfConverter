@@ -25,7 +25,7 @@ namespace SqmToSqfConverter.Models
         public string FillName { get; set; }
         public string MarkerType { get; set; }
 
-        public string GetSqf(out string[] sqf, string groupName = null)
+        public string GetSqf(out string[] sqf, ConvertOptions options, string groupName = null)
         {
             var code = new List<string>();
 
@@ -52,6 +52,11 @@ namespace SqmToSqfConverter.Models
                 code.Add($"\"{name}\" setMarkerBrush \"{FillName}\";");
             if(!String.IsNullOrEmpty(MarkerType))
                 code.Add($"\"{name}\" setMarkerShape \"{MarkerType}\";");
+
+            if (options.AddToGlobalArray)
+                code.Add($"markers pushBack {name};");
+
+            code.Add("");
 
             sqf = code.ToArray();
             VariableName = name;

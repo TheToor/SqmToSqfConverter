@@ -33,6 +33,8 @@
             this.ButtonConvert = new System.Windows.Forms.Button();
             this.ButtonSaveFile = new System.Windows.Forms.Button();
             this.LabelSaveFile = new System.Windows.Forms.Label();
+            this.checkBoxAddToGlobalArray = new System.Windows.Forms.CheckBox();
+            this.checkBoxAutoDeleteEmptyGroups = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // ButtonSelectFile
@@ -58,7 +60,7 @@
             // 
             this.ButtonConvert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonConvert.Location = new System.Drawing.Point(12, 70);
+            this.ButtonConvert.Location = new System.Drawing.Point(12, 93);
             this.ButtonConvert.Name = "ButtonConvert";
             this.ButtonConvert.Size = new System.Drawing.Size(776, 39);
             this.ButtonConvert.TabIndex = 2;
@@ -84,11 +86,33 @@
             this.LabelSaveFile.Size = new System.Drawing.Size(0, 13);
             this.LabelSaveFile.TabIndex = 4;
             // 
+            // checkBoxAddToGlobalArray
+            // 
+            this.checkBoxAddToGlobalArray.AutoSize = true;
+            this.checkBoxAddToGlobalArray.Location = new System.Drawing.Point(12, 70);
+            this.checkBoxAddToGlobalArray.Name = "checkBoxAddToGlobalArray";
+            this.checkBoxAddToGlobalArray.Size = new System.Drawing.Size(114, 17);
+            this.checkBoxAddToGlobalArray.TabIndex = 5;
+            this.checkBoxAddToGlobalArray.Text = "Add to global array";
+            this.checkBoxAddToGlobalArray.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxAutoDeleteEmptyGroups
+            // 
+            this.checkBoxAutoDeleteEmptyGroups.AutoSize = true;
+            this.checkBoxAutoDeleteEmptyGroups.Location = new System.Drawing.Point(132, 70);
+            this.checkBoxAutoDeleteEmptyGroups.Name = "checkBoxAutoDeleteEmptyGroups";
+            this.checkBoxAutoDeleteEmptyGroups.Size = new System.Drawing.Size(148, 17);
+            this.checkBoxAutoDeleteEmptyGroups.TabIndex = 6;
+            this.checkBoxAutoDeleteEmptyGroups.Text = "Auto-Delete empty groups";
+            this.checkBoxAutoDeleteEmptyGroups.UseVisualStyleBackColor = true;
+            // 
             // GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 123);
+            this.ClientSize = new System.Drawing.Size(800, 143);
+            this.Controls.Add(this.checkBoxAutoDeleteEmptyGroups);
+            this.Controls.Add(this.checkBoxAddToGlobalArray);
             this.Controls.Add(this.LabelSaveFile);
             this.Controls.Add(this.ButtonSaveFile);
             this.Controls.Add(this.ButtonConvert);
@@ -108,6 +132,8 @@
         private System.Windows.Forms.Button ButtonConvert;
         private System.Windows.Forms.Button ButtonSaveFile;
         private System.Windows.Forms.Label LabelSaveFile;
+        private System.Windows.Forms.CheckBox checkBoxAddToGlobalArray;
+        private System.Windows.Forms.CheckBox checkBoxAutoDeleteEmptyGroups;
     }
 }
 

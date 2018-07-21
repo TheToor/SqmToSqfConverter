@@ -8,6 +8,6 @@
 
         string VariableName { get; set; }
 
-        string GetSqf(out string[] sqf, string groupName = null);
+        string GetSqf(out string[] sqf, ConvertOptions options, string groupName = null);
     }
 }

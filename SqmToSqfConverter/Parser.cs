@@ -18,13 +18,13 @@ namespace SqmToSqfConverter
             Mission = new Mission();
         }
 
-        internal string[] Parse()
+        internal string[] Parse(ConvertOptions options)
         {
             var intel = _missionFile.SubClasses["Intel"];
             ParseIntel(intel);
 
             var entities = _missionFile.SubClasses["Entities"];
-            ParseEntities(entities);
+            ParseEntities(entities, options);
 
             return _sqf.ToArray();
         }
@@ -46,28 +46,35 @@ namespace SqmToSqfConverter
             WriteSqf("");
         }
 
-        private void ParseEntities(SimpleClass entities)
+        private void ParseEntities(SimpleClass entities, ConvertOptions options)
         {
             foreach(var entity in entities.SubClasses)
             {
                 ParseEntity(entity);
             }
 
+            if (options.AddToGlobalArray)
+            {
+                _sqf.Add("objects = [];");
+                _sqf.Add("groups = [];");
+                _sqf.Add("markers = [];");
+            }
+
             foreach(var entity in Mission.Objects)
             {
-                entity.GetSqf(out var sqf);
+                entity.GetSqf(out var sqf, options);
                 _sqf.AddRange(sqf);
             }
 
             foreach(var group in Mission.Groups)
             {
-                group.GetSqf(out var sqf);
+                group.GetSqf(out var sqf, options);
                 _sqf.AddRange(sqf);
             }
 
             foreach(var marker in Mission.Markers)
             {
-                marker.GetSqf(out var sqf);
+                marker.GetSqf(out var sqf, options);
                 _sqf.AddRange(sqf);
             }
         }
