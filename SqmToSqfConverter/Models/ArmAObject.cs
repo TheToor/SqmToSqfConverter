@@ -39,6 +39,7 @@ namespace SqmToSqfConverter.Models
             }
             else
                 code.Add($"{name} = createVehicle [\"{Type}\", {position}, [], 0, \"NONE\"];");
+
             if(PositionInfo.Angle != null)
             {
                 var angle = PositionInfo.Angle;
@@ -47,7 +48,9 @@ namespace SqmToSqfConverter.Models
                 code.Add($"[{name}, {angle.X}, {angle.Y}] call BIS_fnc_setPitchBank;");
             }
             code.Add($"{name} setPosASL {position};");
-            if(ATLOffset.HasValue)
+            if((Flags & ArmAFlags.SetOnGround) == ArmAFlags.SetOnGround)
+                code.Add($"{name} setPosATL [getPosATL {name} select 0, getPosATL {name} select 1, 0];");
+            else if (ATLOffset.HasValue)
                 code.Add($"{name} setPosATL [getPosATL {name} select 0, getPosATL {name} select 1, {ATLOffset.Value}];");
             else
                 code.Add($"{name} setPosATL [getPosATL {name} select 0, getPosATL {name} select 1, 0];");
