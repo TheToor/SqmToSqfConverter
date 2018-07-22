@@ -35,25 +35,33 @@ namespace SqmToSqfConverter.Models
                 if (name.StartsWith("vehicle"))
                     name = name.Replace("vehicle", "unit");
 
-                code.Add($"{name} = {groupName} createUnit [\"{Type}\", {position}, [], 0, \"NONE\"];");
+                code.Add($"{name} = {groupName} createUnit [\"{Type}\", {position}, [], 0, \"CAN_COLLIDE\"];");
             }
             else
-                code.Add($"{name} = createVehicle [\"{Type}\", {position}, [], 0, \"NONE\"];");
+                code.Add($"{name} = createVehicle [\"{Type}\", {position}, [], 0, \"CAN_COLLIDE\"];");
 
-            if(PositionInfo.Angle != null)
+            var setUpVector = false;
+            if (PositionInfo.Angle != null)
             {
                 var angle = PositionInfo.Angle;
                 //yaw = X, pitch = Y, roll/bank = Z
                 code.Add($"{name} setDir deg({angle.Z});");
-                code.Add($"[{name}, {angle.X}, {angle.Y}] call BIS_fnc_setPitchBank;");
+                if (angle.X != 0 || angle.Y != 0)
+                    code.Add($"[{name}, {angle.X}, {angle.Y}] call BIS_fnc_setPitchBank;");
+                else
+                    setUpVector = true;
             }
+            else
+                setUpVector = true;
+
             code.Add($"{name} setPosASL {position};");
             if((Flags & ArmAFlags.SetOnGround) == ArmAFlags.SetOnGround)
                 code.Add($"{name} setPosATL [getPosATL {name} select 0, getPosATL {name} select 1, 0];");
             else if (ATLOffset.HasValue)
                 code.Add($"{name} setPosATL [getPosATL {name} select 0, getPosATL {name} select 1, {ATLOffset.Value}];");
-            else
-                code.Add($"{name} setPosATL [getPosATL {name} select 0, getPosATL {name} select 1, 0];");
+
+            if(setUpVector)
+                code.Add($"{name} setVectorUp [0,0,1];");
 
             if (Type == "Land_Carrier_01_base_F")
                 code.Add($"[{name}] call BIS_fnc_Carrier01PosUpdate;");
