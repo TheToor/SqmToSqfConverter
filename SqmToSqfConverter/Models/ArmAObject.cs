@@ -92,24 +92,6 @@ namespace SqmToSqfConverter.Models
             sqf = code.ToArray();
             VariableName = name;
             return name;
-            /*
-            if (positionInfo.Properties.ContainsKey("angles[]"))
-            {
-                var angle = TranslateVector(positionInfo.Properties["angles[]"]);
-                _cfgRot params["_P", "_Y", "_R"];
-                _Y = deg _Y;
-                _P = 360 - (deg _P);
-                _R = 360 - (deg _R);         
-                {
-                    private _deg = call compile format [ "%1 mod 360", _x ];
-                    if ( _deg < 0 ) then { _deg = linearConversion[ -0, -360, _deg, 360, 0 ]; };
-                    call compile format[ "%1 = _deg", _x ];
-                } forEach [ "_P", "_R", "_Y" ];        
-                private _up = [sin _R, -sin _P, cos _R * cos _P];
-                _obj setDir _Y;
-                _obj setVectorUp _up;
-            }
-            */
         }
     }
 }
