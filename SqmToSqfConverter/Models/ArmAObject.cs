@@ -57,7 +57,7 @@ namespace SqmToSqfConverter.Models
             code.Add($"{name} setPosASL {position};");
             if((Flags & ArmAFlags.SetOnGround) == ArmAFlags.SetOnGround)
                 code.Add($"{name} setPosATL [getPosATL {name} select 0, getPosATL {name} select 1, 0];");
-            else if (ATLOffset.HasValue)
+            if (ATLOffset.HasValue)
                 code.Add($"{name} setPosATL [getPosATL {name} select 0, getPosATL {name} select 1, {ATLOffset.Value}];");
 
             if(setUpVector)
